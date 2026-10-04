@@ -1,6 +1,8 @@
 """HTTP API. Request bodies are never logged."""
 
 from __future__ import annotations
+from fastapi import FastAPI
+from app.webhook import router as webhook_router
 
 import logging
 import os
@@ -64,3 +66,5 @@ def post_analyze(body: AnalyzeRequest) -> AnalyzeResponse:
 @app.get("/")
 def root():
     return {"service": "sachet", "docs": "/docs", "health": "/health"}
+
+app.include_router(webhook_router)
