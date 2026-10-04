@@ -360,8 +360,10 @@ def classify(redacted_text: str, lang: str) -> tuple[LlmClassification, LlmDebug
                     if d.http_status == 400 and with_thinking:
                         with_thinking = False  # retry once without thinkingConfig
                         continue
+                    if d.http_status == 429:
+                        break  # quota hit on this model: don't hammer it, try the next model
                     retryable = d.stage in ("timeout", "parse", "validate") or d.http_status in (
-                        429, 500, 502, 503, 504,
+                        500, 502, 503, 504,
                     )
                     if not retryable:
                         break  # e.g. 404 model not found -> next model
