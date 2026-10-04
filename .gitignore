@@ -4,3 +4,8 @@ __pycache__/
 .pytest_cache/
 *.pyc
 .coverage
+
+gemini_check.py
+list_models.py
+probe_models.py
+_probe_analyze.py
