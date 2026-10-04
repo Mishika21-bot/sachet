@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 
 from app.guardrail import apply_guardrails
 from app.llm import LlmError, classify
@@ -18,6 +19,26 @@ DISCLAIMER = (
     "It is not a SEBI product, not financial advice, and not a verification of "
     "any intermediary. A matching registration-number format does not mean the "
     "person is registered. Always confirm on SEBI's official website."
+)
+
+_NEUTRAL_EN = (
+    "Our checks did not find specific scam warning signs in this message. That does not "
+    "prove it is safe. If money, a link, an app or personal details were requested, stop "
+    "and verify through the official app or website."
+)
+_NEUTRAL_HI = (
+    "हमारी जाँच में इस संदेश में ठगी का कोई स्पष्ट संकेत नहीं मिला। इसका मतलब यह नहीं कि संदेश "
+    "सुरक्षित है। अगर पैसे, लिंक, ऐप या निजी जानकारी माँगी गई हो तो रुकें और आधिकारिक ऐप या "
+    "वेबसाइट से जाँच करें।"
+)
+_CAUTION_EN = (
+    "Sachet could not point to a specific warning sign in this message, but it is not fully "
+    "sure. Do not pay, click, install or share anything until you verify through the official "
+    "app or website."
+)
+_CAUTION_HI = (
+    "सचेत को इस संदेश में कोई स्पष्ट संकेत नहीं मिला, लेकिन पूरी तरह भरोसा भी नहीं है। आधिकारिक ऐप "
+    "या वेबसाइट से जाँचे बिना पैसे न दें, लिंक न खोलें, ऐप इंस्टॉल न करें और जानकारी साझा न करें।"
 )
 
 
@@ -66,6 +87,28 @@ def _merge_flags(
     return merged
 
 
+def _norm(text: str) -> str:
+    return re.sub(r"\s+", " ", text or "").strip().lower()
+
+
+def _grounded_flags(flags: list[RedFlag], redacted: str) -> list[RedFlag]:
+    """Keep only AI flags whose evidence is a real phrase from the message:
+    not a paraphrase, and not the entire message."""
+    source = _norm(redacted)
+    edge = " .\"'“”‘’"
+    kept: list[RedFlag] = []
+    for flag in flags:
+        evidence = _norm(flag.evidence)
+        fragments = [p.strip(edge) for p in re.split(r"\.{3}|…", evidence)]
+        fragments = [p for p in fragments if p]
+        if not fragments or any(len(p) < 4 or p not in source for p in fragments):
+            continue
+        if len(source) > 60 and len(" ".join(fragments)) >= 0.9 * len(source):
+            continue
+        kept.append(flag)
+    return kept
+
+
 def _rules_explanations(flags: list[RedFlag]) -> tuple[str, str]:
     if not flags:
         return (
@@ -87,6 +130,7 @@ def _rules_explanations(flags: list[RedFlag]) -> tuple[str, str]:
         "यह पैटर्न जाँच है, किसी शेयर पर राय नहीं।",
     )
 
+
 def _fallback_verdict(rv: str, flags: list[RedFlag]) -> tuple[str, int]:
     """AI unavailable: never show a green all-clear; keep verdict and score consistent."""
     score = risk_score_from_flags(flags)
@@ -95,6 +139,7 @@ def _fallback_verdict(rv: str, flags: list[RedFlag]) -> tuple[str, int]:
     if rv == "likely_scam":
         return "likely_scam", max(score, 70)
     return "uncertain", min(max(score, 40), 69)
+
 
 def analyze(text: str, lang: str) -> AnalyzeResponse:
     redacted = redact(text)
@@ -146,8 +191,16 @@ def analyze(text: str, lang: str) -> AnalyzeResponse:
         return apply_guardrails(response)
 
     rules_score = risk_score_from_flags(rule_flags)
+    grounded = _grounded_flags(llm_result.flags, redacted)
     lv = llm_result.verdict
-    llm_has_evidence = bool(llm_result.flags)
+    downgraded = False
+    if not rule_flags and not grounded:
+        # The AI cannot point to anything concrete in the message: be more cautious, not more alarming.
+        if lv == "likely_scam":
+            lv, downgraded = "uncertain", True
+        elif lv == "uncertain":
+            lv, downgraded = "no_red_flags_found", True
+    llm_has_evidence = bool(grounded)
     llm_sure = llm_result.confidence in ("medium", "high")
 
     if lv == rv:
@@ -168,6 +221,8 @@ def analyze(text: str, lang: str) -> AnalyzeResponse:
         # One side says likely_scam, the other says uncertain.
         verdict = "likely_scam" if "likely_scam" in (rv, lv) else "uncertain"
         confidence = "medium" if verdict == "likely_scam" else "low"
+    if downgraded:
+        confidence = "low"
 
     blended = int((llm_result.risk_score + rules_score) / 2)
     if verdict == lv == rv:
@@ -182,15 +237,22 @@ def analyze(text: str, lang: str) -> AnalyzeResponse:
         risk = min(risk, 30)
     risk = min(100, max(0, risk))
 
-    flags = _merge_flags(rule_flags, llm_result.flags, redacted)
+    if downgraded and verdict == "no_red_flags_found":
+        explanation_en, explanation_hi = _NEUTRAL_EN, _NEUTRAL_HI
+    elif downgraded:
+        explanation_en, explanation_hi = _CAUTION_EN, _CAUTION_HI
+    else:
+        explanation_en, explanation_hi = llm_result.explanation_en, llm_result.explanation_hi
+
+    flags = _merge_flags(rule_flags, grounded, redacted)
     steps_en, steps_hi = _next_steps(verdict, sebi.check_link)
     response = AnalyzeResponse(
         verdict=verdict,
         risk_score=risk,
         confidence=confidence,
         red_flags=flags,
-        explanation_en=llm_result.explanation_en,
-        explanation_hi=llm_result.explanation_hi,
+        explanation_en=explanation_en,
+        explanation_hi=explanation_hi,
         next_steps_en=steps_en,
         next_steps_hi=steps_hi,
         sebi_registration=sebi,
