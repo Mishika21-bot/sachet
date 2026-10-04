@@ -1,0 +1,434 @@
+[
+  {
+    "i": 1,
+    "lang": "en",
+    "label": 1,
+    "text": "Exclusive: our SEBI-registered expert gives 100% sure-shot intraday calls. Pay Rs 2999 for the premium group and recover your losses today.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 25.17200000002049
+  },
+  {
+    "i": 2,
+    "lang": "en",
+    "label": 1,
+    "text": "Hello, I am a senior analyst from a top broker. Download our private trading app from this link, deposit Rs 10,000 and withdraw Rs 25,000 next week.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.375
+  },
+  {
+    "i": 3,
+    "lang": "en",
+    "label": 1,
+    "text": "Your demat account will be suspended in 24 hours due to KYC failure. Click this link and enter your details to avoid penalty.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 1.8429999999934807
+  },
+  {
+    "i": 4,
+    "lang": "en",
+    "label": 1,
+    "text": "Last 5 seats! Join our mentorship and our operator will pump the stock tomorrow. Buy before 9:15 and sell at the upper circuit.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.172000000020489
+  },
+  {
+    "i": 5,
+    "lang": "en",
+    "label": 1,
+    "text": "Congratulations! You have won an IPO allotment lottery. Pay the processing fee of Rs 4,500 to receive your shares.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.0160000000032596
+  },
+  {
+    "i": 6,
+    "lang": "en",
+    "label": 1,
+    "text": "Sir this is NSDL official, your shares are held up. Share the OTP you received to release them.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.0
+  },
+  {
+    "i": 7,
+    "lang": "en",
+    "label": 1,
+    "text": "We doubled the money of 300 members this month. Send Rs 20,000 to our company account and see Rs 40,000 in 10 days.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.297000000020489
+  },
+  {
+    "i": 8,
+    "lang": "en",
+    "label": 1,
+    "text": "To recover your lost funds from the earlier broker, pay a refundable verification deposit of Rs 8,000 to our recovery team.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 1.9839999999967404
+  },
+  {
+    "i": 9,
+    "lang": "hi",
+    "label": 1,
+    "text": "हमारे VIP ग्रुप में जुड़ें, रोज़ाना पक्का मुनाफ़ा, आज ही 3000 रुपये भेजकर सीट बुक करें।",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.9369999999762513
+  },
+  {
+    "i": 10,
+    "lang": "hi",
+    "label": 1,
+    "text": "SEBI अधिकारी बोल रहा हूँ, आपका डीमैट खाता बंद होने वाला है। तुरंत यह ऐप डाउनलोड करें और अपना OTP बताएँ।",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.3280000000377186
+  },
+  {
+    "i": 11,
+    "lang": "hi",
+    "label": 1,
+    "text": "बिना जोखिम के एक महीने में पैसा दोगुना करें, हमारे ऑपरेटर के साथ सेटअप है, अभी जुड़ें।",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.062999999965541
+  },
+  {
+    "i": 12,
+    "lang": "hi",
+    "label": 1,
+    "text": "आपको प्री-IPO शेयर मिले हैं, अलॉटमेंट के लिए बुकिंग राशि इस निजी खाते में जमा करें।",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.26500000001397
+  },
+  {
+    "i": 13,
+    "lang": "hi",
+    "label": 1,
+    "text": "हमारी कंपनी SEBI से रजिस्टर्ड है, 15 दिन में 50% रिटर्न की गारंटी, पैसा आज ही ट्रांसफर करें।",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.5939999999827705
+  },
+  {
+    "i": 14,
+    "lang": "hi",
+    "label": 1,
+    "text": "पुराने ब्रोकर में डूबा पैसा वापस दिलाएँगे, पहले 5000 रुपये फीस जमा कीजिए।",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 13.469000000040978
+  },
+  {
+    "i": 15,
+    "lang": "hi",
+    "label": 1,
+    "text": "AnyDesk डाउनलोड करें ताकि हमारा एक्सपर्ट आपके फोन से सीधे आपका निवेश ठीक कर सके।",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.375
+  },
+  {
+    "i": 16,
+    "lang": "hi",
+    "label": 1,
+    "text": "आज रात 9 बजे तक एंट्री लें, कल सुबह शेयर में बड़ा उछाल आएगा, सिर्फ़ हमारे टेलीग्राम ग्रुप को पता है।",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.139999999955762
+  },
+  {
+    "i": 17,
+    "lang": "hinglish",
+    "label": 1,
+    "text": "Bhai pakka profit wala tip hai, kal subah tak 2x ho jayega, bas Rs 5000 is UPI pe bhej do.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.110000000044238
+  },
+  {
+    "i": 18,
+    "lang": "hinglish",
+    "label": 1,
+    "text": "Sir aapka demat band hone wala hai, abhi ye link kholke KYC update karo aur OTP share karo.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.0
+  },
+  {
+    "i": 19,
+    "lang": "hinglish",
+    "label": 1,
+    "text": "Hamare VIP Telegram group me join karo, daily guaranteed returns milte hain, sirf 10 seat bachi hain.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.405999999959022
+  },
+  {
+    "i": 20,
+    "lang": "hinglish",
+    "label": 1,
+    "text": "Operator ka call hai, upper circuit lagega, aaj raat tak entry lo warna chance miss.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.51500000001397
+  },
+  {
+    "i": 21,
+    "lang": "hinglish",
+    "label": 1,
+    "text": "Ye trading app APK download karo, deposit karoge to 30 din me paisa triple.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.73499999998603
+  },
+  {
+    "i": 22,
+    "lang": "hinglish",
+    "label": 1,
+    "text": "Madam apka purana loss recover karwa denge, bas pehle 7000 rupaye verification fee bhejo.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 1.9530000000377186
+  },
+  {
+    "i": 23,
+    "lang": "hinglish",
+    "label": 1,
+    "text": "SEBI registered advisor hu, zero risk plan hai, monthly 25 percent fixed return.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 1.9839999999967404
+  },
+  {
+    "i": 24,
+    "lang": "hinglish",
+    "label": 1,
+    "text": "Screen share karo AnyDesk se, main aapka portfolio theek kar deta hu, bas code bata do.",
+    "verdict": "likely_scam",
+    "mode": "rules+llm",
+    "secs": 2.4689999999827705
+  },
+  {
+    "i": 25,
+    "lang": "en",
+    "label": 0,
+    "text": "Your SIP of Rs 2,000 for the month has been processed. Units will be allotted at the applicable NAV.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.75
+  },
+  {
+    "i": 26,
+    "lang": "en",
+    "label": 0,
+    "text": "Reminder: mutual fund investments are subject to market risks. Read all scheme related documents carefully.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.1869999999762513
+  },
+  {
+    "i": 27,
+    "lang": "en",
+    "label": 0,
+    "text": "Your demat account statement for September is now available in the official app. Never share your OTP with anyone.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.625
+  },
+  {
+    "i": 28,
+    "lang": "en",
+    "label": 0,
+    "text": "NSDL has launched a new feature to track nominee details. Visit the official website to learn more.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 2.0780000000377186
+  },
+  {
+    "i": 29,
+    "lang": "en",
+    "label": 0,
+    "text": "What does diversification mean and why do financial planners recommend it?",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.4689999999827705
+  },
+  {
+    "i": 30,
+    "lang": "en",
+    "label": 0,
+    "text": "The IPO of a company opens for subscription tomorrow. Retail investors can apply through UPI using their broker application.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 2.9060000000172295
+  },
+  {
+    "i": 31,
+    "lang": "en",
+    "label": 0,
+    "text": "Your fixed deposit of Rs 50,000 will mature next week at the interest rate agreed when you opened it.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.6869999999762513
+  },
+  {
+    "i": 32,
+    "lang": "en",
+    "label": 0,
+    "text": "SEBI has advised investors to verify the registration of any adviser on the official SEBI website before investing.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.7189999999827705
+  },
+  {
+    "i": 33,
+    "lang": "hi",
+    "label": 0,
+    "text": "आपका मासिक SIP सफलतापूर्वक हो गया है। यूनिट्स लागू NAV पर आवंटित की जाएँगी।",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.6560000000172295
+  },
+  {
+    "i": 34,
+    "lang": "hi",
+    "label": 0,
+    "text": "म्यूचुअल फंड निवेश बाज़ार जोखिमों के अधीन हैं। कृपया निवेश से पहले सभी योजना दस्तावेज़ ध्यान से पढ़ें।",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.5160000000032596
+  },
+  {
+    "i": 35,
+    "lang": "hi",
+    "label": 0,
+    "text": "अपना OTP कभी किसी के साथ साझा न करें, चाहे वह खुद को बैंक या ब्रोकर का कर्मचारी बताए।",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.2660000000032596
+  },
+  {
+    "i": 36,
+    "lang": "hi",
+    "label": 0,
+    "text": "SIP क्या होता है और छोटे निवेशकों के लिए यह कैसे उपयोगी हो सकता है?",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.4060000000172295
+  },
+  {
+    "i": 37,
+    "lang": "hi",
+    "label": 0,
+    "text": "डीमैट खाते में नॉमिनी जोड़ने के लिए अपने डिपॉजिटरी की आधिकारिक वेबसाइट देखें।",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.4839999999967404
+  },
+  {
+    "i": 38,
+    "lang": "hi",
+    "label": 0,
+    "text": "आपकी एफडी अगले सप्ताह परिपक्व हो रही है। ब्याज दर वही रहेगी जो खाता खोलते समय तय हुई थी।",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.9059999999590218
+  },
+  {
+    "i": 39,
+    "lang": "hi",
+    "label": 0,
+    "text": "शिकायत दर्ज करने के लिए SEBI की SCORES वेबसाइट का उपयोग करें।",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.422000000020489
+  },
+  {
+    "i": 40,
+    "lang": "hi",
+    "label": 0,
+    "text": "बाज़ार आज मामूली गिरावट के साथ बंद हुआ। निवेशकों को लंबी अवधि का नज़रिया रखने की सलाह दी जाती है।",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.577999999979511
+  },
+  {
+    "i": 41,
+    "lang": "hinglish",
+    "label": 0,
+    "text": "Aapka monthly SIP ho gaya hai, units NAV ke hisaab se allot honge.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 2.6560000000172295
+  },
+  {
+    "i": 42,
+    "lang": "hinglish",
+    "label": 0,
+    "text": "Mutual fund me invest karne se pehle scheme ke documents dhyan se padhein, market risk hota hai.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.4380000000237487
+  },
+  {
+    "i": 43,
+    "lang": "hinglish",
+    "label": 0,
+    "text": "Kisi ko bhi apna OTP mat batao, chahe wo khud ko bank wala bataye.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.452999999979511
+  },
+  {
+    "i": 44,
+    "lang": "hinglish",
+    "label": 0,
+    "text": "Diversification ka matlab kya hota hai, simple example ke saath samjhao.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.6089999999967404
+  },
+  {
+    "i": 45,
+    "lang": "hinglish",
+    "label": 0,
+    "text": "Nominee add karna ho to apne depository ki official website par jao.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.4839999999967404
+  },
+  {
+    "i": 46,
+    "lang": "hinglish",
+    "label": 0,
+    "text": "Aapki FD agle hafte mature ho rahi hai, interest rate wahi rahega jo shuru me tay hua tha.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.3439999999827705
+  },
+  {
+    "i": 47,
+    "lang": "hinglish",
+    "label": 0,
+    "text": "SCORES par complaint kaise file karte hain, step by step bata do.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.5
+  },
+  {
+    "i": 48,
+    "lang": "hinglish",
+    "label": 0,
+    "text": "Aaj market thoda neeche band hua, long term investors ke liye ghabrane ki zarurat nahi.",
+    "verdict": "no_red_flags_found",
+    "mode": "rules+llm",
+    "secs": 1.6089999999967404
+  }
+]
