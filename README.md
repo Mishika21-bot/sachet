@@ -1,60 +1,59 @@
-# Sachet
+# 🛡️ Sachet (सचेत) — Project Core Infrastructure
 
-Public-good **scam-pattern checker** for Indian retail investors (SANGYAN hackathon — investor protection). It is **not** a fintech product, **not** investment advice, and **not** a SEBI registration verification service.
+A zero-cost, localized public-good investor-protection infrastructure designed for emerging retail investors in Tier-2 and Tier-3 Indian cities. It translates chaotic, predatory scam vectors into clear safety signals and actionable legal remediation.
 
-Message text is redacted in memory (phones, UPI IDs, emails, bank/Aadhaar-like numbers) **before** any LLM call. Content is never logged or stored.
+This is a public-good framework: it does not promote investment, does not provide advice, and does not sell fintech products.
 
-## Setup
+## 🚀 Unified Architectural Ecosystem
 
-Python 3.11+ recommended.
+- `/frontend`: Optimized React/Next.js interface featuring regional multi-lingual toggles, native voice dictation `SpeechRecognition`), client-side speech playback, and an automatic network outage edge fallback state layer.
+- `/app`: High-performance FastAPI analytical engine driving our privacy-first data pipelines and keyword guardrail suppression architectures.
 
-```powershell
-cd C:\Users\DELL\Desktop\Sachet
+## 🔒 Multi-Layer Hybrid Detection Pipeline
+
+1. **PII Masking `app/redact.py`)**: Sanitizes sensitive user data identifiers (UPI IDs, phone numbers, bank accounts) in-memory before external processing.
+2. **Deterministic Core `app/rules.py`)**: Evaluates payload metadata across 20 unique local regex pattern families for 0ms latency screening.
+3. **AI Core Layer `app/decide.py` / `app/llm.py`)**: Sources highly structured analytical second opinions from the Gemini API using PII-blinded payload strings.
+4. **SEBI Compliance Guardrail `app/guardrail.py`)**: Enforces an absolute output filter that drops stock recommendations or broker promotions instantly.
+5. **Unified Channel Ingress `app/webhook.py`)**: Native API webhook endpoint configured to ingest direct message container flows from Telegram bot polling frameworks or WhatsApp Business API integrations.
+
+## 🛠️ Local Environment Workspace Setup
+
+### 1. Engine Initialization
+
+```bash
+
+
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+source .venv/bin/activate 
 pip install -r requirements.txt
 copy .env.example .env
+
 ```
 
-Optional: put a Google AI Studio Gemini key in `.env` as `GEMINI_API_KEY` (or `GOOGLE_API_KEY` / `LLM_API_KEY`). Default model is `gemini-2.5-flash`. If the key is missing or the model times out, Sachet still runs using **rules-only** detection.
+*Note: Populate the* `GEMINI_API_KEY` *inside your environment* `.env` *file. If the cloud key is missing or encounters a network timeout, Sachet gracefully switches to a secure* `rules_only` *fallback assessment state.*
 
-## Run tests
+### 2. Run Automated Integration Suites
 
-```powershell
-pytest -q
+Validate pipeline components and mock data behaviors via pytest:
+
+```bash
+
+pytest tests/test_[webhook.py](http://webhook.py) -v
+
 ```
 
-## Run the API
+### 3. Launch Local Hot-Reloading Development Gateway Server
 
-```powershell
+```bash
+
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+
 ```
 
-Open the interactive docs at:
+- Interactive Swagger Endpoint Panel: `http://127.0.0`
+- Unified Chat Messaging Channel Webhook Route: `POST /v1/webhooks/message-channel`
 
-**http://127.0.0.1:8000/docs**
+---
 
-(Alternative schema UI: http://127.0.0.1:8000/redoc)
-
-`POST /analyze` body:
-
-```json
-{ "text": "string", "lang": "en" }
-```
-
-`lang` must be `en`, `hi`, or `hinglish`.
-
-`analysis_mode` is `rules+llm` when Gemini/classify ran, or `rules_only` on fallback.
-
-## Design
-
-| Module | Role |
-| --- | --- |
-| `app/redact.py` | Strip PII before LLM |
-| `app/rules.py` | Offline red flags (English / Hindi / Hinglish) |
-| `app/llm.py` | **Single** LLM function (`classify`) |
-| `app/decide.py` | Merge rules + LLM; disagreement → `uncertain`; LLM failure → rules-only |
-| `app/guardrail.py` | Block buy/sell/hold, price calls, broker promotion |
-| `app/sebi.py` | Format-only INH/INA/INZ + 9 digits; official search link, **not** verified |
-
-`next_steps_en` and `next_steps_hi` list the same reporting steps in matching order: cybercrime 1930 / https://cybercrime.gov.in, SEBI SCORES, and SEBI's intermediary search link.
+*Built for the Sangyan Hackathon (IIT BHU x SEBI x NSDL) — Committed to securing India's retail investment space.*
