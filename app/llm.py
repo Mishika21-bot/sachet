@@ -82,6 +82,7 @@ Hard rules:
 - explanation_hi must be natural Hindi in Devanagari.
 - For every flag, "evidence" must be an exact phrase copied word-for-word from the message. Never paraphrase or describe it.
 - A message that only gives routine account information (statements, SIP or dividend credits, maintenance charges), warns people about scams, or asks whether something is a scam is NOT a scam by itself. Mark it no_red_flags_found unless it also asks for money, an OTP or PIN, a link click, an app install, personal details, or joining a group.
+- Do not treat a missing sender name, company name or link as a red flag by itself. Short bank, depository and broker alerts often leave them out. Only flag what the message actually does: asks for money, an OTP or PIN, a link click, an app install, personal details or joining a group, or makes unrealistic return promises.
 
 Return JSON only, matching the provided response schema. No markdown fences.
 """
