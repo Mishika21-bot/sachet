@@ -105,7 +105,57 @@ export default function Home() {
   const t = copy[lang]; const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://sachet-rmgt.onrender.com'; const verdict = analysis ? t.verdicts[analysis.verdict] : ''
   const confidenceLabel = analysis?.confidence ? (lang === 'hi' ? ({ low: 'कम भरोसा', medium: 'मध्यम भरोसा', high: 'उच्च भरोसा' } as const)[analysis.confidence] : `${analysis.confidence[0].toUpperCase()}${analysis.confidence.slice(1)} confidence`) : ''
   const uniqueFlags = analysis?.red_flags?.filter((flag, index, flags) => flags.findIndex((candidate) => candidate.label_en === flag.label_en || candidate.evidence === flag.evidence) === index) || []
-  async function checkMessage() { if (!text.trim()) { setError(t.empty); return } setLoading(true); setError(''); setStage(0); const timer = window.setInterval(() => setStage((s) => Math.min(2, s + 1)), 5000); const slowNotice = window.setTimeout(() => setError('Waking up the server and checking with AI, this can take up to 30 seconds.'), 6000); const abort = new AbortController(); const timeout = window.setTimeout(() => abort.abort(), 35000); try { const res = await fetch(`${apiUrl.replace(/\/$/, '')}/analyze`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: text.trim(), lang }), signal: abort.signal }); if (!res.ok) throw new Error(); const data = await res.json() as Analysis; setAnalysis(data); setScreen('result') } catch { setError(t.error) } finally { clearInterval(timer); clearTimeout(slowNotice); clearTimeout(timeout); setLoading(false) } }
+  async function checkMessage() { 
+    if (!text.trim()) { setError(t.empty); return } 
+    setLoading(true); 
+    setError(''); 
+    setStage(0); 
+    
+    const timer = window.setInterval(() => setStage((s) => Math.min(2, s + 1)), 5000); 
+    const slowNotice = window.setTimeout(() => setError('Waking up the server and checking with AI, this can take up to 30 seconds.'), 6000); 
+    const abort = new AbortController(); 
+    const timeout = window.setTimeout(() => abort.abort(), 35000); 
+    
+    try { 
+      const res = await fetch(`${apiUrl.replace(/\/$/, '')}/analyze`, { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify({ text: text.trim(), lang }), 
+        signal: abort.signal 
+      }); 
+      if (!res.ok) throw new Error(); 
+      const data = await res.json() as Analysis; 
+      setAnalysis(data); 
+      setScreen('result') 
+    } catch { 
+      // 🚨 EDGE FALLBACK LAYER TRAP:
+      // If the backend fails or the network is offline, simulate the local-only pattern matrix safely
+      console.warn("Sachet Routing Notice: Remote Core unreachable. Engaging Local Fallback Layer.");
+      
+      const lowerText = text.toLowerCase();
+      const isScamPattern = lowerText.includes('guaranteed') || lowerText.includes('vip') || lowerText.includes('double');
+      
+      const fallbackAnalysis: Analysis = {
+        verdict: isScamPattern ? 'likely_scam' : 'uncertain',
+        risk_score: isScamPattern ? 90 : 45,
+        analysis_mode: 'rules_only', // 🚨 This triggers your built-in offline banner
+        red_flags: isScamPattern ? [{ label_en: 'Guaranteed Returns Hook', label_hi: 'तय मुनाफे का झांसा', evidence: text }] : [],
+        explanation_en: "⚠️ System running in offline emergency mode. Cloud deep-analysis is currently unavailable. Displaying deterministic pattern markers only.",
+        explanation_hi: "⚠️ सिस्टम ऑफलाइन आपातकालीन मोड में काम कर रहा है। क्लाउड डीप-एनालिसिस अनुपलब्ध है। केवल ज्ञात संदिग्ध पैटर्न की जांच उपलब्ध है।",
+        next_steps_en: ["Do not transfer funds.", "Verify via official channels."],
+        next_steps_hi: ["पैसे ट्रांसफर न करें।", "आधिकारिक माध्यमों से पुष्टि करें।"]
+      };
+      
+      setAnalysis(fallbackAnalysis);
+      setScreen('result'); // ⚡ This forces the page to transition out of the home screen and open the result view!
+    } finally { 
+      clearInterval(timer); 
+      clearTimeout(slowNotice); 
+      clearTimeout(timeout); 
+      setLoading(false) 
+    } 
+  }
+
   function voice() { const Recognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition; if (!Recognition) { setError(t.listeningUnsupported); return } if (listening) return; const r = new Recognition(); r.lang = lang === 'hi' ? 'hi-IN' : 'en-IN'; r.onstart = () => { setListening(true); setError('') }; r.onresult = (e: any) => setText((v) => `${v}${v ? ' ' : ''}${e.results[0][0].transcript}`); r.onend = () => setListening(false); r.onerror = () => { setListening(false); setError(t.listeningUnsupported) }; r.start() }
   function listen() { if (!analysis || !('speechSynthesis' in window)) return; if (speaking) { speechSynthesis.cancel(); setSpeaking(false); return } const u = new SpeechSynthesisUtterance(lang === 'hi' ? analysis.explanation_hi : analysis.explanation_en); u.lang = lang === 'hi' ? 'hi-IN' : 'en-IN'; u.onend = () => setSpeaking(false); speechSynthesis.speak(u); setSpeaking(true) }
   const complaintText = complaintLabels(lang)
