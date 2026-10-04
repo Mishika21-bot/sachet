@@ -434,5 +434,8 @@ def risk_score_from_flags(flags: list[RedFlag]) -> int:
     total = sum(FLAG_WEIGHTS.get(flag.id, 10) for flag in flags)
     return min(100, total)
 
+from app.rules_extra import EXTRA_RULES, EXTRA_WEIGHTS
 
+_RULES.extend(EXTRA_RULES)
+FLAG_WEIGHTS.update(EXTRA_WEIGHTS)
 RULE_IDS = [row[0] for row in _RULES]

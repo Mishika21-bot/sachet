@@ -80,6 +80,8 @@ Hard rules:
 - Work from the already-redacted text only. Do not ask for the original PII.
 - Write explanations in simple language (around Class 8 reading level).
 - explanation_hi must be natural Hindi in Devanagari.
+- For every flag, "evidence" must be an exact phrase copied word-for-word from the message. Never paraphrase or describe it.
+- A message that only gives routine account information (statements, SIP or dividend credits, maintenance charges), warns people about scams, or asks whether something is a scam is NOT a scam by itself. Mark it no_red_flags_found unless it also asks for money, an OTP or PIN, a link click, an app install, personal details, or joining a group.
 
 Return JSON only, matching the provided response schema. No markdown fences.
 """
